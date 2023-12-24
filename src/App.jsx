@@ -1,4 +1,4 @@
-
+import './App.css';
 // Import Router...!
 import Router from "./Router/Router"
 

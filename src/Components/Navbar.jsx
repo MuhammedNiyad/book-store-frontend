@@ -11,13 +11,18 @@ import {navLinks, navRight} from '../Data/Data';
 import { CiMenuFries } from "react-icons/ci";
 import { TfiClose } from "react-icons/tfi";
 
+//Import Button...!
+import Button from './Button';
+
+
+
 export default function Navbar() {
   return (
     <nav>
         <div>
             {/*......Logo......*/}
             <Link to={'/'}>
-                <img src={Logo} alt='logo' />
+                <img className='w-10' src={Logo} alt='logo' />
             </Link>
             {/*......Nav-Links.......*/}
             <ul>
@@ -45,10 +50,10 @@ export default function Navbar() {
                     })
                 }
                 
-                <button className='menu-button'>
+                <Button>
                     <CiMenuFries />
                     <TfiClose />
-                </button>
+                </Button>
 
             </div>
 
