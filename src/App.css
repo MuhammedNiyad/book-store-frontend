@@ -1,0 +1,29 @@
+/* .....Google fonts.... */
+@import url('https://fonts.googleapis.com/css2?family=Prata&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&family=Prata&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    font-weight: 400;
+};
+
+:root{
+    --color-primery: #7a6930;
+    --color-black: #111111;
+    --color-black-Ex: #222222;
+    --color-dark: #7a7a7a;
+    --color-dark-Ex: #e5e3da;
+    --color-light: #efeee8;
+
+    --color-bg-1: #f3f2ec;
+    --color-bg-2:#edebe4;
+
+    --font-family-prata:'Prata',serif;
+    --font-family-Jakarta: 'Plus Jakarta Sans', sans-serif;
+
+    --transition: 4s ease;
+}

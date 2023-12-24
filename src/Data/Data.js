@@ -1,6 +1,6 @@
 
 
-// Nav [a] Links  Data.......................
+// Navbar [a] Links  Data.......................
 export const navLinks =[
     {
         name:'Home',

@@ -1,8 +1,13 @@
-import React from 'react'
+
+// Import Router...!
+import Router from "./Router/Router"
+
 
 export default function App() {
   return (
-    <div>App</div>
+    <>
+      <Router />
+    </>
   )
 }
 
