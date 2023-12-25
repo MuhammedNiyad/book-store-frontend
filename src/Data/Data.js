@@ -42,17 +42,17 @@ export const navLinks =[
     managements: [
       {
           id: 1,
-          icon: FiUser,  
+          icon: FiUser,  //profile icon...!
           link: '*'
       },
       {
           id: 2,
-          icon: BsBag,      
+          icon: BsBag,   //shopping cart icon...!
           link: '*'
       },
       {
           id: 3,
-          icon: VscSearch,      
+          icon: VscSearch,  //search icon...!
           link: '*'
       },
     ]
