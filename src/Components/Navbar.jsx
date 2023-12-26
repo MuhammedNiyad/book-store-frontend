@@ -23,7 +23,7 @@ import { useState } from 'react';
 export default function Navbar() {
     const [toggle, setToggle] = useState(false);
 
-// This for when scroll then side nav hide....!
+// This for when scroll then hide side nav....!
     if(innerWidth < 768){
         window.addEventListener('scroll', ()=> {
             document.querySelector('.nav-Links-Side').classList.add('hidden');
