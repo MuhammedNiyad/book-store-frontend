@@ -23,7 +23,7 @@ import headerShape from '../assets/header-shape.svg';
 export default function Header() {
   return (
     <header className="px-5 lg:px-16 overflow-hidden">
-        <div className="headear-container max-w-[1880px] w-[90%] my-0 mx-auto h-full flex items-center justify-center relative py-5 lg:py-[80px] ">
+        <div className="headear-container max-w-[1440px] w-[90%] my-0 mx-auto h-full flex items-center justify-center relative py-5 lg:py-[80px] ">
             {/* ...........Header Swiper slider............ */}
             <Swiper
             spaceBetween={50}
@@ -56,7 +56,7 @@ export default function Header() {
                 }
             </Swiper>
             {/* ..........Header shepe.......... */}
-            <div className="header-shape absolute top-0 right-0">
+            <div className="header-shape absolute top-0 right-0 -z-10">
                 <img src={headerShape} alt="" />
             </div>
         </div>

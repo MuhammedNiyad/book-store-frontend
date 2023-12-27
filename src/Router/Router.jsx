@@ -16,7 +16,7 @@ export default function Router() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='*' element={<NotFound />} />
-        <Route path='/book' element={<Book />} />
+        <Route path='/book/:id' element={<Book />} />
       </Routes>
       <Footer />
     </BrowserRouter>

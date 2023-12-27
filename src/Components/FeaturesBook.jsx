@@ -58,11 +58,11 @@ export default function FeaturesBook() {
                         },
                     }} >
                     {
-                        featuredBooksData.map(({img, imgLlink, name, nameLink, writer, price}, index)=>{
+                        featuredBooksData.map(({ id, img, imgLlink, name, nameLink, writer, price }, index) => {
                             return(
                                 <SwiperSlide key={index}>
                                     <div className='featurebook-box'>
-                                        <Link to={imgLlink}>
+                                        <Link to={`book/${id}`}>
                                             <img src={img} alt="book" />
                                         </Link>
                                         <div className="featurebook-info sm:ps-5">

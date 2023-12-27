@@ -143,7 +143,8 @@ export const navLinks =[
           nameLink:"book",
           name: 'Great travel at desert',        
           writer:'Sanchit Howdy',
-          price: '$ 38.00 '      
+          price: '$ 38.00 ',
+          shopbtnLink: "*",      
       },
       {
           id: 2,
@@ -151,7 +152,9 @@ export const navLinks =[
           imgLlink: "book", 
           nameLink:"book",
           name: 'Great travel at desert',
+          desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero ipsum enim pharetra hac',
           writer:'Sanchit Howdy',
+          shopbtnLink: "*",
           price: '$ 38.00 ' 
   
       },
@@ -161,7 +164,9 @@ export const navLinks =[
           imgLlink: "book", 
           nameLink:"book", 
           name: 'Great travel at desert',
+          desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero ipsum enim pharetra hac',
           writer:'Sanchit Howdy',
+          shopbtnLink: "*",
           price: '$ 38.00 '      
       },
       {
@@ -170,7 +175,9 @@ export const navLinks =[
           imgLlink: "book", 
           nameLink:"book", 
           name: 'Great travel at desert',
+          desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero ipsum enim pharetra hac',
           writer:'Sanchit Howdy',
+          shopbtnLink: "*",
           price: '$ 38.00 '      
       },
       {
@@ -179,7 +186,9 @@ export const navLinks =[
           imgLlink: "book", 
           nameLink: "book", 
           name: 'Great travel at desert',
+          desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero ipsum enim pharetra hac',
           writer:'Sanchit Howdy',
+          shopbtnLink: "*",
           price: '$ 38.00 '      
       },
   ];
