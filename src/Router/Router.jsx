@@ -7,6 +7,7 @@ import NotFound from '../Pages/NotFound/NotFound';
 // Import Components...!
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
+import Book from '../Pages/Book';
 
 export default function Router() {
   return (
@@ -15,6 +16,7 @@ export default function Router() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='*' element={<NotFound />} />
+        <Route path='/book' element={<Book />} />
       </Routes>
       <Footer />
     </BrowserRouter>

@@ -139,8 +139,8 @@ export const navLinks =[
       {
           id: 1,
           img: FeaturedBooks1, 
-          imgLlink: "*", 
-          nameLink:"*",
+          imgLlink: "book", 
+          nameLink:"book",
           name: 'Great travel at desert',        
           writer:'Sanchit Howdy',
           price: '$ 38.00 '      
@@ -148,8 +148,8 @@ export const navLinks =[
       {
           id: 2,
           img: FeaturedBooks2,  
-          imgLlink: "*", 
-          nameLink:"*",
+          imgLlink: "book", 
+          nameLink:"book",
           name: 'Great travel at desert',
           writer:'Sanchit Howdy',
           price: '$ 38.00 ' 
@@ -158,8 +158,8 @@ export const navLinks =[
       {
           id: 3,
           img: FeaturedBooks3, 
-          imgLlink: "*", 
-          nameLink:"*", 
+          imgLlink: "book", 
+          nameLink:"book", 
           name: 'Great travel at desert',
           writer:'Sanchit Howdy',
           price: '$ 38.00 '      
@@ -167,8 +167,8 @@ export const navLinks =[
       {
           id: 4,
           img: FeaturedBooks4, 
-          imgLlink: "*", 
-          nameLink:"*", 
+          imgLlink: "book", 
+          nameLink:"book", 
           name: 'Great travel at desert',
           writer:'Sanchit Howdy',
           price: '$ 38.00 '      
@@ -176,8 +176,8 @@ export const navLinks =[
       {
           id: 5,
           img: FeaturedBooks5, 
-          imgLlink: "*", 
-          nameLink: "*", 
+          imgLlink: "book", 
+          nameLink: "book", 
           name: 'Great travel at desert',
           writer:'Sanchit Howdy',
           price: '$ 38.00 '      

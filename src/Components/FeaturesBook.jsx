@@ -34,11 +34,29 @@ export default function FeaturesBook() {
             </div>
             <div className=''>
                 <Swiper
-                    spaceBetween={30}
-                    slidesPerView={4}
+                    spaceBetween={20}
+                    slidesPerView={2}
                     loop ={true}
                     modules={[Pagination]}
-                    pagination={{ el: ".swiper-pagination", clickable: true }} >
+                    pagination={{ el: ".swiper-pagination", clickable: true }}
+                    breakpoints={{
+                        0:{
+                            slidesPerView:1,
+                            spaceBetween:0,
+                        },
+                        300: {
+                            slidesPerView: 2,
+                            spaceBetween:20,
+                        },
+                        768:{
+                            slidesPerView:3,
+                            spaceBetween:25,
+                        },
+                        1024:{
+                            slidesPerView:4,
+                            spaceBetween:30,
+                        },
+                    }} >
                     {
                         featuredBooksData.map(({img, imgLlink, name, nameLink, writer, price}, index)=>{
                             return(
@@ -47,27 +65,27 @@ export default function FeaturesBook() {
                                         <Link to={imgLlink}>
                                             <img src={img} alt="book" />
                                         </Link>
-                                        <div className="featurebook-info">
+                                        <div className="featurebook-info sm:ps-5">
                                             <Link to={nameLink} >
-                                                {name}
+                                                <h4 className='font-[prata,serif]'>{name}</h4>
                                             </Link>
-                                            <br />
-                                            <small>{writer}</small>
-                                            <h5>{price}</h5>
+                                            <p className='my-2'>by {writer}</p>
+                                            <h5 className='font-normal font-[prata,serif]'>{price}</h5>
                                         </div>
                                     </div>
                                 </SwiperSlide>
                             )
                         })
                     }
-
-                    <div className="feature-border container"></div>
+                    <div className="feature-border container h-[1px] bg-gray-400 my-10 w-[90%] mx-auto"></div>
                     {/* ........swiper pagination */}
-                    <div className="swiper-pagination"></div>
+                    {/* <div className="swiper-pagination left-0  "></div> */}
                     {/* .......view all product button...... */}
-                    <Link to='*' >
-                        <Button><div className='flex gap-1'><span>View all product</span> <span><BsArrowReturnRight /></span></div></Button>
-                    </Link>
+                    <div>
+                        <Link to='*' >
+                            <Button ><div className='flex gap-2'><span>View all product</span> <span><BsArrowReturnRight /></span></div></Button>
+                        </Link>
+                    </div>
                 </Swiper>
             </div>
 
