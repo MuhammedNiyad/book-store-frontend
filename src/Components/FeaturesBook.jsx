@@ -82,7 +82,7 @@ export default function FeaturesBook() {
                     {/* <div className="swiper-pagination left-0  "></div> */}
                     {/* .......view all product button...... */}
                     <div>
-                        <Link to='*' >
+                        <Link to='/shope' >
                             <Button ><div className='flex gap-2'><span>View all product</span> <span><BsArrowReturnRight /></span></div></Button>
                         </Link>
                     </div>

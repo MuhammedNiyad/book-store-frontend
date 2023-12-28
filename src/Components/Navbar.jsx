@@ -45,7 +45,7 @@ export default function Navbar() {
                         return(
                             <li key={index} className='text-[#606060] text-base uppercase' >
                                 <NavLink to={path} className={({isActive})=> {
-                                    isActive ? 'text-[#c7b064]' : ''
+                                    isActive ? 'active:text-amber-900' : ''
                                 }}>{name}</NavLink>
                             </li>
                         )

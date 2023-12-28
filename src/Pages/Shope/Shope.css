@@ -1,0 +1,19 @@
+.filter-btn button:hover{
+    color: brown;
+}
+.filter-btn .active {
+    border-bottom: 2px solid brown;
+    color: brown;
+}
+.content-item{
+    animation: ContentAni forwards 400ms ease;
+}
+
+@keyframes ContentAni {
+    from{
+        transform: scale(0);
+    }
+    to{
+        transform: scale(1);
+    }
+}
