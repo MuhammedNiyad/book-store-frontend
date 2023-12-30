@@ -403,10 +403,9 @@ export const navLinks =[
   
     socials: [
       { icon: ImFacebook, link: 'https://www.facebook.com' },
-      { icon: FiInstagram, link: 'https://www.twitter.com' },
-      { icon: GrLinkedinOption, link: 'https://www.instagram.com' },
-      { icon: RiTwitterXLine, link: 'https://www.twitter.com' },
-      { icon: ImBehance, link: 'https://www.twitter.com' }
+      { icon: FiInstagram, link: 'https://www.instagram.com' },
+      { icon: GrLinkedinOption, link: 'https://in.linkedin.com' },
+      { icon: RiTwitterXLine, link: 'https://www.twitter.com' }
     ],    
       
   };
