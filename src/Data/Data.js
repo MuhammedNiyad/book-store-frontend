@@ -43,7 +43,7 @@ export const navLinks =[
       {
           id: 1,
           icon: FiUser,  //profile icon...!
-          link: '*'
+          link: 'sign-in'
       },
       {
           id: 2,
@@ -53,7 +53,7 @@ export const navLinks =[
       {
           id: 3,
           icon: VscSearch,  //search icon...!
-          link: '*'
+          link: 'shope'
       },
     ]
       

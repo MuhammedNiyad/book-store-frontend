@@ -71,7 +71,7 @@ export default function Footer() {
           <div className="flex gap-5 my-2">
             {
               FootersLinksData.socials.map((item, index)=>{
-              return <Link to={item.link}><item.icon/></Link>
+              return <Link key={index} to={item.link}><item.icon/></Link>
               })
             }
           </div>

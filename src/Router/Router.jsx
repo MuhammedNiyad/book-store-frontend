@@ -9,6 +9,7 @@ import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import Book from '../Pages/Book';
 import Shope from '../Pages/Shope/Shope';
+import SignIn from '../Pages/Sign_In/SignIn';
 
 export default function Router() {
   return (
@@ -19,6 +20,7 @@ export default function Router() {
         <Route path='*' element={<NotFound />} />
         <Route path='/book/:id' element={<Book />} />
         <Route path='/shope' element={<Shope />} />
+        <Route path='/sign-in' element={<SignIn />} />
       </Routes>
       <Footer />
     </BrowserRouter>
