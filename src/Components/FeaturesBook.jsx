@@ -20,8 +20,30 @@ import Button from './Button';
 // Import react icon.........!
 import { BsArrowReturnRight } from "react-icons/bs";
 
+// Import hooks.......!
+import { useEffect, useState } from 'react';
+
+import axios from 'axios';
+import { imgUrl } from '../utils/urls';
+
 
 export default function FeaturesBook() {
+
+    const [product, setProduct] = useState([]);
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const fetchData = async () => {
+        try {
+            const res = await axios.get(`http://localhost:5000/api/products?category=featuresbook`);
+            setProduct(res.data);
+
+        } catch (error) {
+            console.log("error: ", error);
+        }
+    };
     return (
         <section className='feature-book container px-5 mx-auto '>
             {/* ...........Headding.......... */}
@@ -58,19 +80,19 @@ export default function FeaturesBook() {
                         },
                     }} >
                     {
-                        featuredBooksData.map(({ id, img, imgLlink, name, nameLink, writer, price }, index) => {
+                        product.map(({ _id, img, title, author, price }, index) => {
                             return(
                                 <SwiperSlide key={index}>
                                     <div className='featurebook-box'>
-                                        <Link to={`book/${id}`}>
-                                            <img src={img} alt="book" />
+                                        <Link to={`book/${_id}`}>
+                                            <img src={`${imgUrl}/${img}`} alt="book" className='h-auto' />
                                         </Link>
                                         <div className="featurebook-info sm:ps-5">
-                                            <Link to={nameLink} >
-                                                <h4 className='font-[prata,serif]'>{name}</h4>
+                                            <Link to={`book/${_id}`} >
+                                                <h4 className='font-[prata,serif]'>{title}</h4>
                                             </Link>
-                                            <p className='my-2'>by {writer}</p>
-                                            <h5 className='font-normal font-[prata,serif]'>{price}</h5>
+                                            <p className='my-2'>by {author}</p>
+                                            <h5 className='font-normal font-[prata,serif]'>${price}</h5>
                                         </div>
                                     </div>
                                 </SwiperSlide>

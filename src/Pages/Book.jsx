@@ -6,20 +6,38 @@ import treeShape from '../assets/treeShape.png';
 // Button import........!
 import Button from '../Components/Button';
 
-// Import book........!
-import { sellingBooksData } from '../Data/Data';
 
 // import react Link.........!
 import { Link,useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { imgUrl } from '../utils/urls';
 
-import {featuredBooksData} from '../Data/Data';
 
 
 
 export default function Book() {
     const {id} =  useParams();
-    const books = featuredBooksData[id-1]
-    console.log('books :' ,books);
+    console.log({ id });
+
+    const [product, setProduct] = useState();
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const fetchData = async () => {
+        try {
+            const res = await axios.get(`http://localhost:5000/api/products/find/${id}`);
+            setProduct(res.data);
+
+
+        } catch (error) {
+            console.log("error: ", error);
+        }
+    };
+
+    console.log(product);
 
     return (
         <section className="px-10 lg:px-24 xl:px-36 overflow-hidden">
@@ -34,17 +52,17 @@ export default function Book() {
                             <div className="header-wrapper container flex flex-col md:flex-row mt-0 items-center gap-1 md:gap-[10px] xl:gap-[20px] mx-auto h-full w-full">
                                 {/* .........Header left.......... */}
                                 <div className="heared-left w-full h-full sm:p-20 md:p-2 xl:p-24 max-w-[768px] relative ">
-                                    <img src={books.img} className="w-full h-full object-cover" />
+                        <img src={`${imgUrl}/${product?.img}`} className="w-full h-full object-cover" />
                                     <img src={treeShape} alt=""  className="header-shape absolute bottom-10 xl:bottom-40 -right-28 -z-10" />
                                 </div>
                                 {/* ...........Header right....... */}
                                 <div className="Header-right max-w-[1024px] w-full ">
-                                    <h1 className=" text-2xl md:text-3xl xl:text-5xl xl:leading-[50px] text-[#222222] font-[prata,serif] z-10">{books.name}</h1>
+                        <h1 className=" text-2xl md:text-3xl xl:text-5xl xl:leading-[50px] text-[#222222] font-[prata,serif] z-10">{product?.title}</h1>
                                     <img src={victor} alt='victor img' className='w-12' />
-                                    <h5 className='font-[prata,serif] text-lg sm:text-xl md:text-2xl mt-7 '>by {books.writer}</h5>
-                                    <p /*dangerouslySetInnerHTML={{__html:info}}*/ className="text-sm md:text-base lg:text-xl md:leading-[25px] lg:leading-[200%] tracking-[4%] font-['Plus Jakarta Sans', sans-serif] mt-1 md:mt-3 mb-4 lg:mb-7 ">{books.desc}</p>
-                                    <h5 className='text-2xl my-3'>{books.price}</h5>
-                                    <Link to={books.shopbtnLink}>
+                        <h5 className='font-[prata,serif] text-lg sm:text-xl md:text-2xl mt-7 '>by {product?.author}</h5>
+                        <p /*dangerouslySetInnerHTML={{__html:info}}*/ className="text-sm md:text-base lg:text-xl md:leading-[25px] lg:leading-[200%] tracking-[4%] font-['Plus Jakarta Sans', sans-serif] mt-1 md:mt-3 mb-4 lg:mb-7 ">{product?.desc}</p>
+                        <h5 className='text-2xl my-3 font-[prata,sarif]'>$ {product?.price}</h5>
+                        <Link to={'*'}>
                                         <Button>add to cart</Button>
                                     </Link>
                                 </div>

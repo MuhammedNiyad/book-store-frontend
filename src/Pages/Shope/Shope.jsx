@@ -6,15 +6,34 @@ import victor from '../../assets/victor.png';
 import bg_book from '../../assets/book_bg.png';
 
  // Import Popular Books Data...............
-import { galleryData } from '../../Data/Data';
+// import { galleryData } from '../../Data/Data';
+import { categories } from '../../Data/Data';
 
-// Import useState ..........!
-import { useState } from 'react';
-import { fromJSON } from 'postcss';
-
+// Import hooks ..........!
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { imgUrl } from '../../utils/urls';
+import { Link } from 'react-router-dom';
 
 
 export default function Shope() {
+
+  const [product, setProduct] = useState([]);
+
+  useEffect(()=> {
+    fetchData();
+  }, []);
+
+  const fetchData = async ()=> {
+    try {
+      const res = await axios.get("http://localhost:5000/api/products");
+      setProduct(res.data);
+      
+    } catch (error) {
+      console.log("error: ",error);
+    }
+  };
+  // console.log(product);
 
 
   const [activeButton, setActiveButton] = useState('all');
@@ -24,7 +43,7 @@ export default function Shope() {
   }
 
 
-  const filterItems = activeButton === 'all' ? galleryData : galleryData.filter((item)=> {
+  const filterItems = activeButton === 'all' ? product : product.filter((item)=> {
     return(
     item.category === activeButton
   )});
@@ -42,10 +61,14 @@ export default function Shope() {
           </div>
           {/* ..........Filter-buttons............... */}
           <div className='filter-btn mt-10 mb-20 flex justify-center items-center gap-4 flex-wrap text-lg font-[Plus Jakarta Sans, sans serif] '>
-            <button onClick={()=>handleFilterChange('all')} className={activeButton === 'all' ? 'active' : ''} >
-              All
-            </button>
-            <button onClick={()=>handleFilterChange('Adventure')} className={activeButton === 'Adventure' ? 'active' : ''}>
+            { categories.map(({category}, index) => {
+              return(
+                <button key={index} onClick={()=>handleFilterChange(category)} className={activeButton === category ? 'active' : ''} >
+                {category}
+                </button>
+              )
+            })}
+            {/* <button onClick={()=>handleFilterChange('Adventure')} className={activeButton === 'Adventure' ? 'active' : ''}>
               Adventure
             </button>
             <button onClick={()=>handleFilterChange('Romantic')} className={activeButton === 'Romantic' ? 'active' : ''}>
@@ -59,21 +82,25 @@ export default function Shope() {
             </button>
             <button onClick={()=>handleFilterChange('Fictional')} className={activeButton === 'Fictional' ? 'active' : ''}>
               Fictional
-            </button>
+            </button> */}
           </div>
           {/* ............filter-book-content............ */}
           <div className='header-content grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 text-center'>
             {
-              filterItems.map(({name, writer, price, image}, index)=> {
+              filterItems.map(({ _id, title, author, price, img}, index)=> {
                 return(
                   <div className='content-item mb-5' key={index}>
                     <div className='content-image'>
-                      <img src={image} />
+                      <Link to={`/book/${_id}`}>
+                      <img src={`${imgUrl}/${img}`} className='w-full h-auto' />
+                      </Link>
                     </div>
                     <div className='content-info '>
-                      <h3 className='font-[prata,serif] text-sm sm:text-base md:text-lg'>{name}</h3>
-                      <p className='text-xs md:text-sm py-2'>by {writer}</p>
-                      <h5 className='font-[prata,serif] text-xs md:text-sm'>{price}</h5>
+                      <Link to={`/book/${_id}`}>
+                      <h3 className='font-[prata,serif] text-sm sm:text-base md:text-lg'>{title}</h3>
+                      </Link>
+                      <p className='text-xs md:text-sm py-2'>by {author}</p>
+                      <h5 className='font-[prata,serif] text-xs md:text-sm'>$ {price}</h5>
                     </div>
                   </div>
                 )

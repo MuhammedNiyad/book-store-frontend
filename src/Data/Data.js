@@ -409,3 +409,11 @@ export const navLinks =[
     ],    
       
   };
+
+  export const categories = [
+    {category: "All"},
+    {category: "Technology"},
+    {category: "Business"},
+    {category: "Romantic"},
+    {category: "Travell Diary"},
+  ];
