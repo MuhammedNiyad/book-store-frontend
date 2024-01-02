@@ -48,7 +48,7 @@ export const navLinks =[
       {
           id: 2,
           icon: BsBag,   //shopping cart icon...!
-          link: '*'
+          link: 'cart'
       },
       {
           id: 3,
@@ -202,6 +202,24 @@ export const navLinks =[
   export const sellingBooksData =[
       {
           id: 1,
+          img: sellingBookimage,
+          infoTitleTop: 'By Timbur Hood',
+          infoTitle: 'Birds gonna be happy',
+          desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero ipsum enim pharetra hac',
+          price: '$ 45.00',
+          shopbtnLink: "*",
+      },
+      {
+          id: 2,
+          img: sellingBookimage,
+          infoTitleTop: 'By Timbur Hood',
+          infoTitle: 'Birds gonna be happy',
+          desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero ipsum enim pharetra hac',
+          price: '$ 45.00',
+          shopbtnLink: "*",
+      },
+      {
+          id: 3,
           img: sellingBookimage,
           infoTitleTop: 'By Timbur Hood',
           infoTitle: 'Birds gonna be happy',
@@ -415,5 +433,5 @@ export const navLinks =[
     {category: "Technology"},
     {category: "Business"},
     {category: "Romantic"},
-    {category: "Travell Diary"},
+    {category: "Adventure"},
   ];

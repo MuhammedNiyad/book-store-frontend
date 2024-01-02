@@ -18,7 +18,7 @@ import { Link } from 'react-router-dom';
 
 export default function Shope() {
 
-  const [product, setProduct] = useState([]);
+  const [products, setProduct] = useState([]);
 
   useEffect(()=> {
     fetchData();
@@ -33,19 +33,20 @@ export default function Shope() {
       console.log("error: ",error);
     }
   };
-  // console.log(product);
+  console.log(products);
 
 
-  const [activeButton, setActiveButton] = useState('all');
+  const [activeButton, setActiveButton] = useState('All');
 
   const handleFilterChange = (category)=> {
     setActiveButton(category);
   }
 
+  console.log({ activeButton });
 
-  const filterItems = activeButton === 'all' ? product : product.filter((item)=> {
+  const filterItems = activeButton === 'All' ? products : products.filter((item) => {
     return(
-    item.category === activeButton
+      item.categories.includes(activeButton) 
   )});
 
   return (
@@ -92,7 +93,7 @@ export default function Shope() {
                   <div className='content-item mb-5' key={index}>
                     <div className='content-image'>
                       <Link to={`/book/${_id}`}>
-                      <img src={`${imgUrl}/${img}`} className='w-full h-auto' />
+                        <img src={`${imgUrl}/${img}`} className='w-full h-auto aspect-square object-contain' />
                       </Link>
                     </div>
                     <div className='content-info '>

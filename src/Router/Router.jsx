@@ -11,6 +11,7 @@ import Book from '../Pages/Book';
 import Shope from '../Pages/Shope/Shope';
 import SignIn from '../Pages/Sign_In/SignIn';
 import Register from '../Pages/Register/Register';
+import Cart from '../Pages/Cart';
 
 
 export default function Router() {
@@ -24,6 +25,7 @@ export default function Router() {
         <Route path='/shope' element={<Shope />} />
         <Route path='/sign-in' element={<SignIn />} />
         <Route path='/register' element={<Register />} />
+        <Route path='/cart' element={<Cart />} />
       </Routes>
       <Footer />
     </BrowserRouter>

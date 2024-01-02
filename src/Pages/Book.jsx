@@ -62,7 +62,7 @@ export default function Book() {
                         <h5 className='font-[prata,serif] text-lg sm:text-xl md:text-2xl mt-7 '>by {product?.author}</h5>
                         <p /*dangerouslySetInnerHTML={{__html:info}}*/ className="text-sm md:text-base lg:text-xl md:leading-[25px] lg:leading-[200%] tracking-[4%] font-['Plus Jakarta Sans', sans-serif] mt-1 md:mt-3 mb-4 lg:mb-7 ">{product?.desc}</p>
                         <h5 className='text-2xl my-3 font-[prata,sarif]'>$ {product?.price}</h5>
-                        <Link to={'*'}>
+                        <Link to={'/cart'}>
                                         <Button>add to cart</Button>
                                     </Link>
                                 </div>
