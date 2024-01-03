@@ -12,23 +12,31 @@ export default function Cart() {
     // const {id} =  useParams();
     // console.log({ id });
 
-    // const [product, setProduct] = useState([]);
+    const [product, setProduct] = useState([]);
 
-    // useEffect(() => {
-    //     fetchData();
-    // }, []);
+    useEffect(() => {
+        fetchData();
+    }, []);
 
-    // const fetchData = async () => {
-    //     try {
+    const fetchData = async () => {
+        const authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ODQyNDM5YmI5YThkYzY3NGY3MmJjNyIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcwNDI1Njg3OX0.8dYPT5UywqNb4E-56ShmZTtOy8wrVdFNT92lNpZcBW4';
+
+        const headers = {
+            'Content-Type': 'application/json',
+            token: `Bearer ${authToken}`, // Include your token here
+          };
+
+        try {
             
-    //         const res = await axios.get(`http://localhost:5000/api/products/find/${id}`);
-    //         setProduct(res.data);
+            const res = await axios.get(`http://localhost:5000/api/carts/userCart`, {headers});
+            setProduct(res.data);
 
 
-    //     } catch (error) {
-    //         console.log("error: ", error);
-    //     }
-    // };
+        } catch (error) {
+            console.log("error: ", error);
+        }
+    };
+    console.log("products: ",product);
 
 
     const [quantity, setQuantity] = useState(1);

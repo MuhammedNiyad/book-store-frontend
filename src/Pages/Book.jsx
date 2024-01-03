@@ -39,12 +39,10 @@ export default function Book() {
 
     // console.log(product);
     
-    const cartProductData = [
-        {
+    const cartProductData = {
             productId: product?._id,
             quantity: 1,
-        }
-    ];
+        };
     
     const authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ODQyNDM5YmI5YThkYzY3NGY3MmJjNyIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcwNDI1Njg3OX0.8dYPT5UywqNb4E-56ShmZTtOy8wrVdFNT92lNpZcBW4'
 
@@ -55,7 +53,7 @@ export default function Book() {
           };
         try {
             const req = await axios.post(`http://localhost:5000/api/carts`,cartProductData, {headers});
-            console.log("cartData: ", req.data);
+            // console.log("cartData: ", req.data);
         } catch (error) {
             console.log("add to cart error :", error);
         }
