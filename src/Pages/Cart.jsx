@@ -1,13 +1,48 @@
 
+import { useParams } from "react-router-dom";
 import { sellingBooksData } from "../Data/Data"
 
 import victor from '../assets/victor.png';
 
+import React, { useEffect, useState } from 'react';
+import axios from "axios";
 
 export default function Cart() {
+
+    // const {id} =  useParams();
+    // console.log({ id });
+
+    // const [product, setProduct] = useState([]);
+
+    // useEffect(() => {
+    //     fetchData();
+    // }, []);
+
+    // const fetchData = async () => {
+    //     try {
+            
+    //         const res = await axios.get(`http://localhost:5000/api/products/find/${id}`);
+    //         setProduct(res.data);
+
+
+    //     } catch (error) {
+    //         console.log("error: ", error);
+    //     }
+    // };
+
+
+    const [quantity, setQuantity] = useState(1);
+
+    const qntIncBtn = ()=>{
+        setQuantity((prevQnty) => prevQnty + 1 )
+    }
+    const qntDecBtn = ()=>{
+        setQuantity((prevQnty) => prevQnty - 1 )
+    }
+
     return (
         <section className="px-4 sm:px-20 md:px-28 lg:px-36 xl:px-48 py-10 flex flex-col justify-center items-center overflow-hidden ">
-            <div className="">
+            <div>
             <div className='flex flex-col items-center py-14 justify-center w-full md:mt-5'>
               <div className='flex-col items-start py-3'>
                 <p className='capitalize text-[#7a7a7a] mb-1 font-[Plus Jakarta, Sans sarif] font-medium text-xs md:text-base '>buy quality books</p>
@@ -16,21 +51,21 @@ export default function Cart() {
               <img src={victor} alt='victor img' className='w-12' />
           </div>
                 {
-                    sellingBooksData.map(({ img, infoTitle, price }, index) => {
+                    sellingBooksData.map(({ img, title , price }, index) => {
                         return (
                             <div key={index} className="flex items-center justify-center border-b-[1px] border-gray-500 py-10">
                                 <div className="flex gap-2">
-                                    <img src={img} alt="book" className="w-[100px]" />
+                                    <img src={ img /*`${imgUrl}/${img}`*/} alt="book" className="w-[100px]" />
                                     <div className="flex flex-col gap-2 sm:flex-row sm:gap-16 md:gap-28 lg:gap-36 justify-end sm:justify-center items-center">
                                         <div className="font-[prata,serif]">
-                                            <h4 className=" sm:text-lg pb-2">{infoTitle}</h4>
+                                            <h4 className=" sm:text-lg pb-2">{title}</h4>
                                         <p className="text-sm sm:text-base">{price}</p>
                                         </div>
                                         <div className="font-[prata,serif]">
                                             <p className="text-center mb-2">Quantity:</p>
-                                            <button className="px-2 py-0 mx-2 hover:bg-[#edebe4] rounded-full shadow-sm border-[1px] border-gray-400 text-xl shadow-[0,0,2px, gray] duration-300 scale-[1] hover:scale-[1.1] text-black font-semibold">−</button>
-                                            5
-                                            <button className="px-2 py-0 mx-2 hover:bg-[#edebe4] rounded-full shadow-sm border-[1px] border-gray-400 text-xl shadow-[0,0,2px, gray] duration-300 scale-[1] hover:scale-[1.1] text-black font-semibold">+</button>
+                                            <button disabled={quantity === 1} onClick={qntDecBtn} className="px-2 py-0 mx-2 hover:bg-[#edebe4] rounded-full shadow-sm border-[1px] border-gray-400 text-xl shadow-[0,0,2px, gray] duration-300 scale-[1] hover:scale-[1.1] text-black font-semibold">−</button>
+                                            {quantity}
+                                            <button disabled={quantity === 5} onClick={qntIncBtn} className="px-2 py-0 mx-2 hover:bg-[#edebe4] rounded-full shadow-sm border-[1px] border-gray-400 text-xl shadow-[0,0,2px, gray] duration-300 scale-[1] hover:scale-[1.1] text-black font-semibold">+</button>
                                         </div>
                                     </div>
                                 </div>

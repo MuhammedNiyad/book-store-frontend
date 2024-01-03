@@ -33,7 +33,7 @@ export default function Shope() {
       console.log("error: ",error);
     }
   };
-  console.log(products);
+  // console.log(products);
 
 
   const [activeButton, setActiveButton] = useState('All');
@@ -42,7 +42,7 @@ export default function Shope() {
     setActiveButton(category);
   }
 
-  console.log({ activeButton });
+  // console.log({ activeButton });
 
   const filterItems = activeButton === 'All' ? products : products.filter((item) => {
     return(
