@@ -1,25 +1,32 @@
 
-import { useParams } from "react-router-dom";
-import { sellingBooksData } from "../Data/Data"
+// import { useParams } from "react-router-dom";
+// import { sellingBooksData } from "../Data/Data"
 
 import victor from '../assets/victor.png';
+import { TfiClose } from "react-icons/tfi";
+
 
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
+import { imgUrl, productFetchUrl } from '../utils/urls';
 
 export default function Cart() {
 
     // const {id} =  useParams();
     // console.log({ id });
 
-    const [product, setProduct] = useState([]);
+    const [products, setProducts] = useState([]);
+    const [cart, setCart] = useState([]);
+    const [quantity, setQuantity] = useState([]);
+
+    const authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ODQyNDM5YmI5YThkYzY3NGY3MmJjNyIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcwNDI1Njg3OX0.8dYPT5UywqNb4E-56ShmZTtOy8wrVdFNT92lNpZcBW4';
+
 
     useEffect(() => {
         fetchData();
-    }, []);
+    },[]);
 
     const fetchData = async () => {
-        const authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ODQyNDM5YmI5YThkYzY3NGY3MmJjNyIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcwNDI1Njg3OX0.8dYPT5UywqNb4E-56ShmZTtOy8wrVdFNT92lNpZcBW4';
 
         const headers = {
             'Content-Type': 'application/json',
@@ -29,23 +36,84 @@ export default function Cart() {
         try {
             
             const res = await axios.get(`http://localhost:5000/api/carts/userCart`, {headers});
-            setProduct(res.data);
+            setCart(res.data)
+            // console.log(res.data);
 
+            const productIds = res.data.products.map((p) => p.productId);
+            // console.log("ids", { productIds });
+            const quantities = res.data.products.map((p) => p.quantity);
+            console.log("quantities:", { quantities });
+            setQuantity(quantities);
+
+            const productFetchPromises = productIds.map(async (id) => {
+                try {
+                    const response = await axios.get(`${productFetchUrl}/${id}`);
+                    return response.data; // Return the fetched product data
+                } catch (error) {
+                    console.log(`Error fetching product with ID ${id}:`, error);
+                    return null; // Return null or handle the error as needed
+                }
+            });
+
+            const productsData = await Promise.all(productFetchPromises);
+            setProducts(productsData.filter(product => product !== null));
 
         } catch (error) {
             console.log("error: ", error);
         }
     };
-    console.log("products: ",product);
+
+    // console.log("cart: ", cart);
+    // console.log("products: ", products);
 
 
-    const [quantity, setQuantity] = useState(1);
+    const qntIncBtn = async (id)=> {
+        const headers = {
+            'Content-Type': 'application/json',
+            token: `Bearer ${authToken}`, // Include your token here
+          };
+        try {
+            const req = await axios.post(`http://localhost:5000/api/carts`,{
+                productId: id,
+                quantity: 1
+            }, {headers});
+            fetchData();
+            // console.log("cartData: ", req.data);
+        } catch (error) {
+            console.log("add to cart error :", error);
+        }
+    }  
 
-    const qntIncBtn = ()=>{
-        setQuantity((prevQnty) => prevQnty + 1 )
-    }
-    const qntDecBtn = ()=>{
-        setQuantity((prevQnty) => prevQnty - 1 )
+    const qntDecBtn = async (id)=> {
+            const headers = {
+                'Content-Type': 'application/json',
+                token: `Bearer ${authToken}`, // Include your token here
+              };
+            try {
+                const req = await axios.post(`http://localhost:5000/api/carts`,{
+                    productId: id,
+                    quantity: -1
+                }, {headers});
+                fetchData();
+                // console.log("cartData: ", req.data);
+            } catch (error) {
+                console.log("add to cart error :", error);
+            }
+        }
+
+    const removeBtn = async (id)=>{
+        const headers = {
+            'Content-Type': 'application/json',
+            token: `Bearer ${authToken}`, // Include your token here
+          };
+        try {
+            await axios.delete(`http://localhost:5000/api/carts/${id}`,{headers});
+
+            fetchData();
+
+        } catch (error) {
+            console.log("remove button error:", error);
+        }
     }
 
     return (
@@ -59,23 +127,24 @@ export default function Cart() {
               <img src={victor} alt='victor img' className='w-12' />
           </div>
                 {
-                    sellingBooksData.map(({ img, title , price }, index) => {
+                    products.map(({ _id , img, title, price }, index) => {
                         return (
                             <div key={index} className="flex items-center justify-center border-b-[1px] border-gray-500 py-10">
-                                <div className="flex gap-2">
-                                    <img src={ img /*`${imgUrl}/${img}`*/} alt="book" className="w-[100px]" />
-                                    <div className="flex flex-col gap-2 sm:flex-row sm:gap-16 md:gap-28 lg:gap-36 justify-end sm:justify-center items-center">
+                                <div className="flex gap-2 w-full relative">
+                                    <img src={ `${imgUrl}/${img}`} alt="book" className="w-[100px]" />
+                                    <div className="flex flex-col gap-2 sm:flex-row sm:gap-16 md:gap-28 lg:gap-36 w-full justify-center sm:justify-between items-center">
                                         <div className="font-[prata,serif]">
                                             <h4 className=" sm:text-lg pb-2">{title}</h4>
                                         <p className="text-sm sm:text-base">{price}</p>
                                         </div>
                                         <div className="font-[prata,serif]">
                                             <p className="text-center mb-2">Quantity:</p>
-                                            <button disabled={quantity === 1} onClick={qntDecBtn} className="px-2 py-0 mx-2 hover:bg-[#edebe4] rounded-full shadow-sm border-[1px] border-gray-400 text-xl shadow-[0,0,2px, gray] duration-300 scale-[1] hover:scale-[1.1] text-black font-semibold">−</button>
-                                            {quantity}
-                                            <button disabled={quantity === 5} onClick={qntIncBtn} className="px-2 py-0 mx-2 hover:bg-[#edebe4] rounded-full shadow-sm border-[1px] border-gray-400 text-xl shadow-[0,0,2px, gray] duration-300 scale-[1] hover:scale-[1.1] text-black font-semibold">+</button>
+                                            <button disabled={quantity[index] === 1} onClick={()=>qntDecBtn(_id)} className="px-2 py-0 mx-2 hover:bg-[#edebe4] rounded-full shadow-sm border-[1px] border-gray-400 text-xl shadow-[0,0,2px, gray] duration-300 scale-[1] hover:scale-[1.1] text-black font-semibold">−</button>
+                                            {quantity[index]}
+                                            <button disabled={quantity[index] === 5} onClick={()=>qntIncBtn(_id)} className="px-2 py-0 mx-2 hover:bg-[#edebe4] rounded-full shadow-sm border-[1px] border-gray-400 text-xl shadow-[0,0,2px, gray] duration-300 scale-[1] hover:scale-[1.1] text-black font-semibold">+</button>
                                         </div>
                                     </div>
+                                    <button onClick={()=>removeBtn(_id)} className='absolute top-0 right-0 duration-300 rotate-0 hover:rotate-180'>< TfiClose /></button>
                                 </div>
                             </div>
                         )
@@ -87,5 +156,4 @@ export default function Cart() {
                 </div>
             </div>
         </section>
-    )
-}
+    )  }
