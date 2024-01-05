@@ -7,6 +7,7 @@ import { TfiClose } from "react-icons/tfi";
 
 
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from "axios";
 import { imgUrl, productFetchUrl } from '../utils/urls';
 
@@ -15,8 +16,8 @@ export default function Cart() {
     // const {id} =  useParams();
     // console.log({ id });
 
+    // const [cart, setCart] = useState([]);
     const [products, setProducts] = useState([]);
-    const [cart, setCart] = useState([]);
     const [quantity, setQuantity] = useState([]);
 
     const authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ODQyNDM5YmI5YThkYzY3NGY3MmJjNyIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcwNDI1Njg3OX0.8dYPT5UywqNb4E-56ShmZTtOy8wrVdFNT92lNpZcBW4';
@@ -36,7 +37,7 @@ export default function Cart() {
         try {
             
             const res = await axios.get(`http://localhost:5000/api/carts/userCart`, {headers});
-            setCart(res.data)
+            // setCart(res.data)
             // console.log(res.data);
 
             const productIds = res.data.products.map((p) => p.productId);
@@ -64,7 +65,7 @@ export default function Cart() {
     };
 
     // console.log("cart: ", cart);
-    // console.log("products: ", products);
+    console.log("products: ", products);
 
 
     const qntIncBtn = async (id)=> {
@@ -127,7 +128,7 @@ export default function Cart() {
               <img src={victor} alt='victor img' className='w-12' />
           </div>
                 {
-                    products.map(({ _id , img, title, price }, index) => {
+                     products.map(({ _id , img, title, price }, index) => {
                         return (
                             <div key={index} className="flex items-center justify-center border-b-[1px] border-gray-500 py-10">
                                 <div className="flex gap-2 w-full relative">
@@ -148,12 +149,25 @@ export default function Cart() {
                                 </div>
                             </div>
                         )
-                    })
+                    }) 
+                    // <div>
+                    // <h1 className='font-[prata,serif] text-xl sm:text-2xl md:text-3xl text-center ' >Your cart is empty!</h1>
+                    // <button  className="btn uppercase mt-3 py-3 px-9 duration-300 relative bg-transparent hover:text-white after:contents:'' after:w-0 after:h-full after:bg-black after:absolute after:left-0 after:top-0 after:duration-300 after:hover:w-full ">Back to shope</button>
+                    // </div>
                 }
-                <div className="flex flex-col">
-                    <h3 className="font-[prata,serif] text-end my-4">Total Amount: $599</h3>
-                <button type='submit' className="btn uppercase mt-3 py-3 px-9 duration-300 relative bg-transparent hover:text-white after:contents:'' after:w-0 after:h-full after:bg-black after:absolute after:left-0 after:top-0 after:duration-300 after:hover:w-full ">Buy now 🤑</button>
-                </div>
+                {
+                    products.length !== 0? 
+                    <div className="flex flex-col mb-40">
+                        <h3 className="font-[prata,serif] text-end my-4">Total Amount: $599</h3>
+                    <button type='submit' className="btn uppercase mt-3 py-3 px-9 duration-300 relative bg-transparent hover:text-white after:contents:'' after:w-0 after:h-full after:bg-black after:absolute after:left-0 after:top-0 after:duration-300 after:hover:w-full ">Buy now 🤑</button>
+                    </div> :
+                    <div className='flex flex-col justify-center my-24'>
+                    <h1 className='font-[prata,serif] text-xl sm:text-2xl md:text-3xl text-center my-32 ' >Your cart is empty!</h1>
+                    <Link to={'/shope'} className='w-auto flex justify-center'>
+                    <button  className="btn uppercase mt-3 py-3 px-9 duration-300 relative bg-transparent hover:text-white after:contents:'' after:w-0 after:h-full after:bg-black after:absolute after:left-0 after:top-0 after:duration-300 after:hover:w-full ">Back to shope</button>
+                    </Link>
+                    </div>
+                }
             </div>
         </section>
     )  }
