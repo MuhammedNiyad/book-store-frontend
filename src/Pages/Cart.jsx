@@ -19,6 +19,8 @@ export default function Cart() {
     // const [cart, setCart] = useState([]);
     const [products, setProducts] = useState([]);
     const [quantity, setQuantity] = useState([]);
+    const [totalAmount, setTotalAmount] = useState(0);
+
 
     const authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ODQyNDM5YmI5YThkYzY3NGY3MmJjNyIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcwNDI1Njg3OX0.8dYPT5UywqNb4E-56ShmZTtOy8wrVdFNT92lNpZcBW4';
 
@@ -29,6 +31,14 @@ export default function Cart() {
 
     const fetchData = async () => {
 
+        const calculateTotal = () => {
+            const total = products.reduce((acc, product, index) => {
+              return acc + product.price * quantity[index];
+            }, 0);
+            setTotalAmount(total);
+            console.log( 'Total: ',total);
+          };
+
         const headers = {
             'Content-Type': 'application/json',
             token: `Bearer ${authToken}`, // Include your token here
@@ -38,34 +48,37 @@ export default function Cart() {
             
             const res = await axios.get(`http://localhost:5000/api/carts/userCart`, {headers});
             // setCart(res.data)
-            // console.log(res.data);
+            console.log("cartData: ",res.data);
 
             const productIds = res.data.products.map((p) => p.productId);
             // console.log("ids", { productIds });
             const quantities = res.data.products.map((p) => p.quantity);
-            console.log("quantities:", { quantities });
+            // console.log("quantities:", { quantities });
             setQuantity(quantities);
 
             const productFetchPromises = productIds.map(async (id) => {
                 try {
                     const response = await axios.get(`${productFetchUrl}/${id}`);
                     return response.data; // Return the fetched product data
+                    
                 } catch (error) {
                     console.log(`Error fetching product with ID ${id}:`, error);
                     return null; // Return null or handle the error as needed
                 }
             });
-
+            
             const productsData = await Promise.all(productFetchPromises);
             setProducts(productsData.filter(product => product !== null));
-
+            
+            // calculateTotal();
+            // console.log('totalAmount-1: ',totalAmount);
+            
         } catch (error) {
             console.log("error: ", error);
         }
+        calculateTotal();
+        console.log('totalAmount: ',totalAmount);
     };
-
-    // console.log("cart: ", cart);
-    console.log("products: ", products);
 
 
     const qntIncBtn = async (id)=> {
@@ -128,7 +141,7 @@ export default function Cart() {
               <img src={victor} alt='victor img' className='w-12' />
           </div>
                 {
-                     products.map(({ _id , img, title, price }, index) => {
+                    products.map(({ _id , img, title, price }, index) => {
                         return (
                             <div key={index} className="flex items-center justify-center border-b-[1px] border-gray-500 py-10">
                                 <div className="flex gap-2 w-full relative">
@@ -136,7 +149,7 @@ export default function Cart() {
                                     <div className="flex flex-col gap-2 sm:flex-row sm:gap-16 md:gap-28 lg:gap-36 w-full justify-center sm:justify-between items-center">
                                         <div className="font-[prata,serif]">
                                             <h4 className=" sm:text-lg pb-2">{title}</h4>
-                                        <p className="text-sm sm:text-base">{price}</p>
+                                        <p className="text-sm sm:text-base">${price * quantity[index] }</p>
                                         </div>
                                         <div className="font-[prata,serif]">
                                             <p className="text-center mb-2">Quantity:</p>
@@ -150,15 +163,11 @@ export default function Cart() {
                             </div>
                         )
                     }) 
-                    // <div>
-                    // <h1 className='font-[prata,serif] text-xl sm:text-2xl md:text-3xl text-center ' >Your cart is empty!</h1>
-                    // <button  className="btn uppercase mt-3 py-3 px-9 duration-300 relative bg-transparent hover:text-white after:contents:'' after:w-0 after:h-full after:bg-black after:absolute after:left-0 after:top-0 after:duration-300 after:hover:w-full ">Back to shope</button>
-                    // </div>
                 }
                 {
                     products.length !== 0? 
                     <div className="flex flex-col mb-40">
-                        <h3 className="font-[prata,serif] text-end my-4">Total Amount: $599</h3>
+                        <h3 className="font-[prata,serif] text-end my-4">Total Amount: ${totalAmount}</h3>
                     <button type='submit' className="btn uppercase mt-3 py-3 px-9 duration-300 relative bg-transparent hover:text-white after:contents:'' after:w-0 after:h-full after:bg-black after:absolute after:left-0 after:top-0 after:duration-300 after:hover:w-full ">Buy now 🤑</button>
                     </div> :
                     <div className='flex flex-col justify-center my-24'>
