@@ -10,20 +10,17 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from "axios";
 import { imgUrl, productFetchUrl } from '../utils/urls';
+import { useSelector } from "react-redux";
 
 export default function Cart() {
 
-    // const {id} =  useParams();
-    // console.log({ id });
 
     // const [cart, setCart] = useState([]);
+    const { currentUser } = useSelector((state) => state.user);
     const [products, setProducts] = useState([]);
     const [quantity, setQuantity] = useState([]);
-    const [totalAmount, setTotalAmount] = useState(0);
 
-
-    const authToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ODQyNDM5YmI5YThkYzY3NGY3MmJjNyIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcwNDI1Njg3OX0.8dYPT5UywqNb4E-56ShmZTtOy8wrVdFNT92lNpZcBW4';
-
+    // console.log('currentUser: ', currentUser);
 
     useEffect(() => {
         fetchData();
@@ -31,17 +28,9 @@ export default function Cart() {
 
     const fetchData = async () => {
 
-        const calculateTotal = () => {
-            const total = products.reduce((acc, product, index) => {
-              return acc + product.price * quantity[index];
-            }, 0);
-            setTotalAmount(total);
-            console.log( 'Total: ',total);
-          };
-
         const headers = {
             'Content-Type': 'application/json',
-            token: `Bearer ${authToken}`, // Include your token here
+            'token': `Bearer ${currentUser}`, // Include your token here
           };
 
         try {
@@ -69,22 +58,17 @@ export default function Cart() {
             
             const productsData = await Promise.all(productFetchPromises);
             setProducts(productsData.filter(product => product !== null));
-            
-            // calculateTotal();
-            // console.log('totalAmount-1: ',totalAmount);
-            
+
         } catch (error) {
             console.log("error: ", error);
         }
-        calculateTotal();
-        console.log('totalAmount: ',totalAmount);
     };
 
 
     const qntIncBtn = async (id)=> {
         const headers = {
             'Content-Type': 'application/json',
-            token: `Bearer ${authToken}`, // Include your token here
+            token: `Bearer ${currentUser}`, // Include your token here
           };
         try {
             const req = await axios.post(`http://localhost:5000/api/carts`,{
@@ -101,7 +85,7 @@ export default function Cart() {
     const qntDecBtn = async (id)=> {
             const headers = {
                 'Content-Type': 'application/json',
-                token: `Bearer ${authToken}`, // Include your token here
+                token: `Bearer ${currentUser}`, // Include your token here
               };
             try {
                 const req = await axios.post(`http://localhost:5000/api/carts`,{
@@ -118,7 +102,7 @@ export default function Cart() {
     const removeBtn = async (id)=>{
         const headers = {
             'Content-Type': 'application/json',
-            token: `Bearer ${authToken}`, // Include your token here
+            token: `Bearer ${currentUser}`, // Include your token here
           };
         try {
             await axios.delete(`http://localhost:5000/api/carts/${id}`,{headers});
@@ -167,7 +151,7 @@ export default function Cart() {
                 {
                     products.length !== 0? 
                     <div className="flex flex-col mb-40">
-                        <h3 className="font-[prata,serif] text-end my-4">Total Amount: ${totalAmount}</h3>
+                            <h3 className="font-[prata,serif] text-end my-4">Total Amount: ${'499'}</h3>
                     <button type='submit' className="btn uppercase mt-3 py-3 px-9 duration-300 relative bg-transparent hover:text-white after:contents:'' after:w-0 after:h-full after:bg-black after:absolute after:left-0 after:top-0 after:duration-300 after:hover:w-full ">Buy now 🤑</button>
                     </div> :
                     <div className='flex flex-col justify-center my-24'>

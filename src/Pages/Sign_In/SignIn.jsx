@@ -7,6 +7,8 @@ import { LuUserCircle } from "react-icons/lu";
 import { MdLockOutline } from "react-icons/md";
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { SignInSuccess, SignInFailure } from '../../redux/user/userSlice';
 
 
 
@@ -14,6 +16,7 @@ export default function SignIn() {
     const [formData, setFromData] = useState({});
     const [register, setRegister] = useState(false);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleChange = (e)=>{
 
@@ -28,24 +31,29 @@ export default function SignIn() {
         e.preventDefault();
         try {
             const res = await axios.post('http://localhost:5000/api/user/login', formData);
-            console.log(res.data);
-            console.log('User Login successful..!');
+            // console.log(res.data);
+            const data = await res.data;
+            dispatch(SignInSuccess(data.access_token))
+            console.log('User Login successful..!', data.access_token);
+            setRegister(true);
         } catch (error) {
             console.log('login submit error: ', error);
+            dispatch(SignInFailure(error.message));
         }
-    }
-
-    const token = useState.access_token;
-    console.log('token',token);
+        
+    };
+    if(register === true){
+            navigate('/')
+        }
 
   return (
     <section className="flex justify-center items-start w-full min-h-screen overflow-hidden">
         <div className='bg-[#edebe4] mt-32 py-20 px-16 md:px-36 relative'>
             <h3 className='font-[Prata,sarif] text-xl text-center uppercase'>Login in</h3>
-            <form onSubmit={handleSubmit} className='flex flex-col justify-center items-center mt-3'>
+            <form onSubmit={handleSubmit} autoComplete='off' className='flex flex-col justify-center items-center mt-3'>
                 <div className='input-box'>
                     <span className='icon'><LuUserCircle /></span>
-                    <input type='text' required className='h-16 text-xl w-[250px] sm:w=[300px] md:w-[350px]' id='username' onChange={handleChange}/> 
+                      <input type='text' required className='active:bg-[#edebe4] h-16 text-xl w-[250px] sm:w=[300px] md:w-[350px]' id='username' onChange={handleChange} /> 
                     <label>Username:</label>
                 </div>
                     <div className='input-box'>

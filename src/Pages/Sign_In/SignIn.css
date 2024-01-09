@@ -4,6 +4,7 @@
     height: 50px;
     border-bottom: 2px solid black;
     margin: 10px 0;
+    
 }
 .input-box label{
     position: absolute;
@@ -23,7 +24,7 @@
 }
 
 .input-box input{
-    /* background: transparent; */
+    background: transparent !important;
     border: none;
     outline: none;
     padding-left: 2px;

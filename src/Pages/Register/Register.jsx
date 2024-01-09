@@ -47,7 +47,7 @@ export default function Register() {
     <section className="flex justify-center items-start w-full min-h-screen overflow-hidden">
         <div className='bg-[#edebe4] mt-32 py-20 px-16 md:px-36 relative'>
             <h3 className='font-[Prata,sarif] text-xl text-center uppercase'>Login in</h3>
-            <form onSubmit={handleSubmit} className='flex flex-col justify-center items-center mt-3'>
+            <form onSubmit={handleSubmit} autoComplete='off' className='flex flex-col justify-center items-center mt-3'>
                 <div className='input-box'>
                     <span className='icon'><LuUserCircle /></span>
                     <input type='text' required className='h-16 text-xl w-[250px] sm:w=[300px] md:w-[350px]' id='username' onChange={handleChange}/> 
