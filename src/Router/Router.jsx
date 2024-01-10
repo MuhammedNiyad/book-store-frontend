@@ -12,6 +12,10 @@ import Shope from '../Pages/Shope/Shope';
 import SignIn from '../Pages/Sign_In/SignIn';
 import Register from '../Pages/Register/Register';
 import Cart from '../Pages/Cart';
+import About from '../Pages/About';
+import Pages from '../Pages/Pages';
+import Article from '../Pages/Article';
+import Contact from '../Pages/Contact';
 
 
 export default function Router() {
@@ -26,6 +30,10 @@ export default function Router() {
         <Route path='/sign-in' element={<SignIn />} />
         <Route path='/register' element={<Register />} />
         <Route path='/cart' element={<Cart />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/pages' element={<Pages />} />
+        <Route path='/articles' element={<Article />} />
+        <Route path='/contact' element={<Contact />} />
       </Routes>
       <Footer />
     </BrowserRouter>
