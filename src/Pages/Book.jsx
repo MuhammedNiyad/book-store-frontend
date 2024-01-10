@@ -52,19 +52,25 @@ export default function Book() {
 
 
     const addToCart = async ()=> {
-        const headers = {
-            'Content-Type': 'application/json',
-            'token': `Bearer ${currentUser}`, // Include your token here
-          };
-        try {
-            const req = await axios.post(`http://localhost:5000/api/carts`,cartProductData, {headers});
-            // console.log("cartData: ", req.data);
 
-
-        } catch (error) {
-            console.log("add to cart error :", error);
+        if(currentUser != null){
+            const headers = {
+                'Content-Type': 'application/json',
+                'token': `Bearer ${currentUser}`, // Include your token here
+              };
+            try {
+                const req = await axios.post(`http://localhost:5000/api/carts`,cartProductData, {headers});
+                // console.log("cartData: ", req.data);
+    
+    
+            } catch (error) {
+                console.log("add to cart error :", error);
+            }
+    
+            navigate('/cart');
+        }else{
+            navigate('/sign-in')
         }
-        navigate('/cart')
     };
 
     return (
@@ -87,9 +93,8 @@ export default function Book() {
                                     <h5 className='font-[prata,serif] text-lg sm:text-xl md:text-2xl mt-7 '>by {product?.author}</h5>
                                     <p className="text-sm md:text-base lg:text-xl md:leading-[25px] lg:leading-[200%] tracking-[4%] font-['Plus Jakarta Sans', sans-serif] mt-1 md:mt-3 mb-4 lg:mb-7 ">{product?.desc}</p>
                                     <h5 className='text-2xl my-3 font-[prata,sarif]'>$ {product?.price}</h5>
-                                    <Link onClick={addToCart}>
-                                        <Button >add to cart</Button>
-                                    </Link>
+                
+                                    <button onClick={addToCart} type='submit' className="btn uppercase mt-3 py-3 px-9 duration-300 relative bg-transparent hover:text-white after:contents:'' after:w-0 after:h-full after:bg-black after:absolute after:left-0 after:top-0 after:duration-300 after:hover:w-full ">add</button>
                                 </div>
                             </div>
             </div>
