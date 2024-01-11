@@ -16,6 +16,7 @@ import About from '../Pages/About';
 import Pages from '../Pages/Pages';
 import Article from '../Pages/Article';
 import Contact from '../Pages/Contact';
+import Profile from '../Pages/Profile';
 
 
 export default function Router() {
@@ -27,6 +28,7 @@ export default function Router() {
         <Route path='*' element={<NotFound />} />
         <Route path='/book/:id' element={<Book />} />
         <Route path='/shope' element={<Shope />} />
+        <Route path='/profile' element={<Profile />} />
         <Route path='/sign-in' element={<SignIn />} />
         <Route path='/register' element={<Register />} />
         <Route path='/cart' element={<Cart />} />
