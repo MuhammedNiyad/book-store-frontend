@@ -18,9 +18,17 @@ import { TfiClose } from "react-icons/tfi";
 import { useState } from 'react';
 
 
+//nav right links......!
+import { FiUser } from 'react-icons/fi';
+import { VscSearch } from 'react-icons/vsc';
+import { BsBag } from 'react-icons/bs';
+
+import { useSelector } from "react-redux";
+
 
 
 export default function Navbar() {
+    const { currentUser } = useSelector((state) => state.user);
     const [toggle, setToggle] = useState(false);
 
 // This for when scroll then hide side nav....!
@@ -54,17 +62,16 @@ export default function Navbar() {
             </ul>
             {/*......Nav-Rights.......*/}
             <div className='nav-right flex items-center gap-7  '>
-                {
-                    navRight.managements.map((item, index)=>{
-                        return(
-                            <Link key={index} 
-                            // target='_blank' 
-                            className='management-icons text-[#7a7a7a] text-[17px] ' to={item.link}>
-                                <item.icon />
-                            </Link>
-                        )
-                    })
-                }
+
+                    <Link className='management-icons text-[#7a7a7a] text-[17px] ' to={currentUser !== null ? '/profile' : '/sign-in'}>
+                        <FiUser />
+                    </Link>
+                    <Link className='management-icons text-[#7a7a7a] text-[17px] ' to={currentUser !== null ? '/cart' : '/sign-in'}>
+                        <BsBag />
+                    </Link>
+                    <Link className='management-icons text-[#7a7a7a] text-[17px] ' to='/shope'>
+                        <VscSearch/>
+                    </Link>
                 
                 <button onClick={()=> setToggle((togPrev)=> !togPrev)} className='menu-button flex md:hidden text-[#7a7a7a] text-lg'>
                     {
