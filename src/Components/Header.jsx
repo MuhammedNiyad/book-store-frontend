@@ -5,10 +5,12 @@
 
 // Import Swiper React components and Swiper styles.....!
 import { Swiper, SwiperSlide } from 'swiper/react';
+import {Autoplay} from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import 'swiper/css/autoplay';
 
 //Import Link from react router dom....!
 import { Link } from "react-router-dom";
@@ -47,9 +49,13 @@ export default function Header() {
         <div className="headear-container max-w-[1440px] w-[90%] my-0 mx-auto h-full flex items-center justify-center relative py-5 lg:py-[80px] ">
             {/* ...........Header Swiper slider............ */}
             <Swiper
+            modules={[Autoplay]}
             spaceBetween={50}
             slidesPerView={1}
+            autoplay = {{delay: 3000}}
             loop={true}
+            
+                
             // onSlideChange={()=> console.log('slide change')}
             // onSwiper={(swiper)=> console.log(swiper)}
             >

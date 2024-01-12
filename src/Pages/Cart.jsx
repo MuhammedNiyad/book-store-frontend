@@ -15,7 +15,7 @@ import { useSelector } from "react-redux";
 export default function Cart() {
 
 
-    // const [cart, setCart] = useState([]);
+    const [cart, setCart] = useState([]);
     const { currentUser } = useSelector((state) => state.user);
     const [products, setProducts] = useState([]);
     const [quantity, setQuantity] = useState([]);
@@ -36,7 +36,7 @@ export default function Cart() {
         try {
             
             const res = await axios.get(`http://localhost:5000/api/carts/userCart`, {headers});
-            // setCart(res.data)
+            setCart(res.data)
             console.log("cartData: ",res.data);
 
             const productIds = res.data.products.map((p) => p.productId);
@@ -137,9 +137,9 @@ export default function Cart() {
                                         </div>
                                         <div className="font-[prata,serif]">
                                             <p className="text-center mb-2">Quantity:</p>
-                                            <button disabled={quantity[index] === 1} onClick={()=>qntDecBtn(_id)} className="px-2 py-0 mx-2 hover:bg-[#edebe4] rounded-full shadow-sm border-[1px] border-gray-400 text-xl shadow-[0,0,2px, gray] duration-300 scale-[1] hover:scale-[1.1] text-black font-semibold">−</button>
+                                            <button disabled={quantity[index] <= 1} onClick={()=>qntDecBtn(_id)} className="px-2 py-0 mx-2 hover:bg-[#edebe4] rounded-full shadow-sm border-[1px] border-gray-400 text-xl shadow-[0,0,2px, gray] duration-300 scale-[1] hover:scale-[1.1] text-black font-semibold">−</button>
                                             {quantity[index]}
-                                            <button disabled={quantity[index] === 5} onClick={()=>qntIncBtn(_id)} className="px-2 py-0 mx-2 hover:bg-[#edebe4] rounded-full shadow-sm border-[1px] border-gray-400 text-xl shadow-[0,0,2px, gray] duration-300 scale-[1] hover:scale-[1.1] text-black font-semibold">+</button>
+                                            <button disabled={quantity[index] >= 5} onClick={()=>qntIncBtn(_id)} className="px-2 py-0 mx-2 hover:bg-[#edebe4] rounded-full shadow-sm border-[1px] border-gray-400 text-xl shadow-[0,0,2px, gray] duration-300 scale-[1] hover:scale-[1.1] text-black font-semibold">+</button>
                                         </div>
                                     </div>
                                     <button onClick={()=>removeBtn(_id)} className='absolute top-0 right-0 duration-300 rotate-0 hover:rotate-180'>< TfiClose /></button>
@@ -151,7 +151,7 @@ export default function Cart() {
                 {
                     products.length !== 0? 
                     <div className="flex flex-col mb-40">
-                            <h3 className="font-[prata,serif] text-end my-4">Total Amount: ${'499'}</h3>
+                            <h3 className="font-[prata,serif] text-end my-4">Total Amount: ${cart.grandTotal}</h3>
                     <button type='submit' className="btn uppercase mt-3 py-3 px-9 duration-300 relative bg-transparent hover:text-white after:contents:'' after:w-0 after:h-full after:bg-black after:absolute after:left-0 after:top-0 after:duration-300 after:hover:w-full ">Buy now 🤑</button>
                     </div> :
                     <div className='flex flex-col justify-center my-24'>
