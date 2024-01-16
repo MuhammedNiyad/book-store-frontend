@@ -37,7 +37,7 @@ export default function Header() {
 
   const fetchData = async ()=> {
     try {
-      const res = await axios.get(`https://ecommerce-bookstore-lac.vercel.app/api/products?category=special`);
+      const res = await axios.get(`https://ecommerce-api-nine-kappa.vercel.app/api/products?category=special`);
       setProduct(res.data);
       
     } catch (error) {
