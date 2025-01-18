@@ -6,7 +6,7 @@ import victor from '../../assets/victor.png';
 import bg_book from '../../assets/book_bg.png';
 
  // Import Popular Books Data...............
-// import { galleryData } from '../../Data/Data';
+import { galleryData } from '../../Data/Data';
 import { categories } from '../../Data/Data';
 
 // Import hooks ..........!
@@ -18,21 +18,21 @@ import { Link } from 'react-router-dom';
 
 export default function Shope() {
 
-  const [products, setProduct] = useState([]);
+  const [products, setProduct] = useState(galleryData);
 
-  useEffect(()=> {
-    fetchData();
-  }, []);
+  // useEffect(()=> {
+  //   fetchData();
+  // }, []);
 
-  const fetchData = async ()=> {
-    try {
-      const res = await axios.get("http://localhost:5000/api/products");
-      setProduct(res.data);
+  // const fetchData = async ()=> {
+  //   try {
+  //     const res = await axios.get("http://localhost:5000/api/products");
+  //     setProduct(res.data);
       
-    } catch (error) {
-      console.log("error: ",error);
-    }
-  };
+  //   } catch (error) {
+  //     console.log("error: ",error);
+  //   }
+  // };
   // console.log(products);
 
 
@@ -88,19 +88,19 @@ export default function Shope() {
           {/* ............filter-book-content............ */}
           <div className='header-content grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 text-center'>
             {
-              filterItems.map(({ _id, title, author, price, img}, index)=> {
+              filterItems.map(({ id, name, writer, price, image}, index)=> {
                 return(
                   <div className='content-item mb-5' key={index}>
                     <div className='content-image'>
-                      <Link to={`/book/${_id}`}>
-                        <img src={`${imgUrl}/${img}`} className='w-full h-auto aspect-square object-contain' />
+                      <Link to={`/book/${id}`}>
+                        <img src={image} className='w-full h-auto aspect-square object-contain' />
                       </Link>
                     </div>
                     <div className='content-info '>
-                      <Link to={`/book/${_id}`}>
-                      <h3 className='font-[prata,serif] text-sm sm:text-base md:text-lg'>{title}</h3>
+                      <Link to={`/book/${id}`}>
+                      <h3 className='font-[prata,serif] text-sm sm:text-base md:text-lg'>{name}</h3>
                       </Link>
-                      <p className='text-xs md:text-sm py-2'>by {author}</p>
+                      <p className='text-xs md:text-sm py-2'>by {writer}</p>
                       <h5 className='font-[prata,serif] text-xs md:text-sm'>$ {price}</h5>
                     </div>
                   </div>

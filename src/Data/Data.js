@@ -144,7 +144,7 @@ export const navLinks =[
           name: 'Great travel at desert', 
           desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero ipsum enim pharetra hac',       
           writer:'Sanchit Howdy',
-          price: '$ 38.00 ',
+          price: ' 38.00 ',
           shopbtnLink: "*",      
       },
       {
@@ -156,7 +156,7 @@ export const navLinks =[
           desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero ipsum enim pharetra hac',
           writer:'Sanchit Howdy',
           shopbtnLink: "*",
-          price: '$ 38.00 ' 
+          price: ' 38.00 ' 
   
       },
       {
@@ -168,7 +168,7 @@ export const navLinks =[
           desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero ipsum enim pharetra hac',
           writer:'Sanchit Howdy',
           shopbtnLink: "*",
-          price: '$ 38.00 '      
+          price: ' 38.00 '      
       },
       {
           id: 4,
@@ -179,7 +179,7 @@ export const navLinks =[
           desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero ipsum enim pharetra hac',
           writer:'Sanchit Howdy',
           shopbtnLink: "*",
-          price: '$ 38.00 '      
+          price: ' 38.00 '      
       },
       {
           id: 5,
@@ -190,7 +190,7 @@ export const navLinks =[
           desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero ipsum enim pharetra hac',
           writer:'Sanchit Howdy',
           shopbtnLink: "*",
-          price: '$ 38.00 '      
+          price: ' 38.00 '      
       },
   ];
   
@@ -206,7 +206,7 @@ export const navLinks =[
           infoTitleTop: 'By Timbur Hood',
           infoTitle: 'Birds gonna be happy',
           desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero ipsum enim pharetra hac',
-          price: '$ 45.00',
+          price: ' 45.00',
           shopbtnLink: "*",
       },
       {
@@ -215,7 +215,7 @@ export const navLinks =[
           infoTitleTop: 'By Timbur Hood',
           infoTitle: 'Birds gonna be happy',
           desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero ipsum enim pharetra hac',
-          price: '$ 45.00',
+          price: ' 45.00',
           shopbtnLink: "*",
       },
       {
@@ -224,7 +224,7 @@ export const navLinks =[
           infoTitleTop: 'By Timbur Hood',
           infoTitle: 'Birds gonna be happy',
           desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero ipsum enim pharetra hac',
-          price: '$ 45.00',
+          price: ' 45.00',
           shopbtnLink: "*",
       }
   ];
@@ -249,7 +249,7 @@ export const navLinks =[
         id: 1,
         name: 'Great travel at desert',
         writer:'Sanchit Howdy',
-        price: '$ 38.00 ' ,
+        price: ' 38.00 ' ,
         category: 'Business',
         image: popularbook1,
       },
@@ -257,7 +257,7 @@ export const navLinks =[
         id: 2,
         name: 'Great travel at desert',
         writer:'Sanchit Howdy',
-        price: '$ 38.00 ' ,
+        price: ' 38.00 ' ,
         category: 'Technology',
         image: popularbook2,
       },
@@ -265,7 +265,7 @@ export const navLinks =[
         id: 3,
         name: 'Great travel at desert',
         writer:'Sanchit Howdy',
-        price: '$ 38.00 ' ,
+        price: ' 38.00 ' ,
         category: 'Adventure',
         image: popularbook3,
       },
@@ -273,7 +273,7 @@ export const navLinks =[
         id: 4,
         name: 'Great travel at desert',
         writer:'Sanchit Howdy',
-        price: '$ 38.00 ' ,
+        price: ' 38.00 ' ,
         category: 'Romantic',
         image: popularbook4,
       },
@@ -281,7 +281,7 @@ export const navLinks =[
         id: 5,
         name: 'Great travel at desert',
         writer:'Sanchit Howdy',
-        price: '$ 38.00 ' ,
+        price: ' 38.00 ' ,
         category: 'Fictional',
         image: popularbook5,
       },
@@ -289,7 +289,7 @@ export const navLinks =[
         id: 6,
         name: 'Great travel at desert',
         writer:'Sanchit Howdy',
-        price: '$ 38.00 ' ,
+        price: ' 38.00 ' ,
         category: 'Business',
         image: popularbook6,
       },
@@ -297,7 +297,7 @@ export const navLinks =[
         id: 7,
         name: 'Great travel at desert',
         writer:'Sanchit Howdy',
-        price: '$ 38.00 ' ,
+        price: ' 38.00 ' ,
         category: 'Technology',
         image: popularbook7,
       },
@@ -305,7 +305,7 @@ export const navLinks =[
         id: 8,
         name: 'Great travel at desert',
         writer:'Sanchit Howdy',
-        price: '$ 38.00 ' ,
+        price: ' 38.00 ' ,
         category: 'Romantic',
         image: popularbook8,
       },

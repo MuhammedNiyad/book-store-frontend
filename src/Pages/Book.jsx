@@ -12,7 +12,9 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { imgUrl } from '../utils/urls';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { galleryData } from '../Data/Data';
+import { addToCart } from '../redux/cart/cartSlice';
 
 
 
@@ -25,34 +27,53 @@ export default function Book() {
     // console.log({ id });
     const [product, setProduct] = useState();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
 
     // console.log('userToken: ', currentUser);
 
     useEffect(() => {
         fetchData();
-    }, []);
+    }, [id]);
 
     const fetchData = async () => {
-        try {
+        // try {
+
+            console.log(galleryData);
+            console.log(id);
+            
+            const filteredData = galleryData.find((item) => item.id == id);
+            console.log(filteredData);
+            
+            setProduct(filteredData);
+
+            return
             const res = await axios.get(`http://localhost:5000/api/products/find/${id}`);
             setProduct(res.data);
 
-        } catch (error) {
-            console.log("error: ", error);
-        }
+        // } catch (error) {
+        //     console.log("error: ", error);
+        // }
     };
 
     // console.log(product);
     
-    const cartProductData = {
-            productId: product?._id,
+    // const cartProductData = {
+    //         product: product,
+    //         quantity: 1,
+    //     };
+
+
+    const addItemToCart = async ()=> {
+
+        dispatch(addToCart({
+            product: product,
             quantity: 1,
-        };
+        }));
 
+        navigate('/cart');
 
-    const addToCart = async ()=> {
-
+        return
         if(currentUser != null){
             const headers = {
                 'Content-Type': 'application/json',
@@ -83,18 +104,18 @@ export default function Book() {
                     <div className="header-wrapper container flex flex-col md:flex-row mt-0 items-center gap-1 md:gap-[10px] xl:gap-[20px] mx-auto h-full w-full">
                         {/* .........Header left.......... */}
                         <div className="heared-left w-full h-full sm:p-20 md:p-2 xl:p-24 max-w-[768px] relative ">
-                            <img src={`${imgUrl}/${product?.img}`} className="w-full h-full object-cover" />
+                            <img src={product?.image} className="w-full h-full object-cover" />
                             <img src={treeShape} alt=""  className="header-shape absolute bottom-10 xl:bottom-40 -right-28 -z-10" />
                         </div>
                         {/* ...........Header right....... */}
                                 <div className="Header-right max-w-[1024px] w-full ">
-                                    <h1 className=" text-2xl md:text-3xl xl:text-5xl xl:leading-[50px] text-[#222222] font-[prata,serif] z-10">{product?.title}</h1>
+                                    <h1 className=" text-2xl md:text-3xl xl:text-5xl xl:leading-[50px] text-[#222222] font-[prata,serif] z-10">{product?.name}</h1>
                                     <img src={victor} alt='victor img' className='w-12' />
-                                    <h5 className='font-[prata,serif] text-lg sm:text-xl md:text-2xl mt-7 '>by {product?.author}</h5>
+                                    <h5 className='font-[prata,serif] text-lg sm:text-xl md:text-2xl mt-7 '>by {product?.writer}</h5>
                                     <p className="text-sm md:text-base lg:text-xl md:leading-[25px] lg:leading-[200%] tracking-[4%] font-['Plus Jakarta Sans', sans-serif] mt-1 md:mt-3 mb-4 lg:mb-7 ">{product?.desc}</p>
                                     <h5 className='text-2xl my-3 font-[prata,sarif]'>$ {product?.price}</h5>
                 
-                                    <button onClick={addToCart} type='submit' className="btn uppercase mt-3 py-3 px-9 duration-300 relative bg-transparent hover:text-white after:contents:'' after:w-0 after:h-full after:bg-black after:absolute after:left-0 after:top-0 after:duration-300 after:hover:w-full ">add to cart</button>
+                                    <button onClick={addItemToCart} type='submit' className="btn uppercase mt-3 py-3 px-9 duration-300 relative bg-transparent hover:text-white after:contents:'' after:w-0 after:h-full after:bg-black after:absolute after:left-0 after:top-0 after:duration-300 after:hover:w-full ">add to cart</button>
                                 </div>
                             </div>
             </div>

@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import SignIn from '../../Pages/Sign_In/SignIn';
 
 const initialState = {
     currentUser: null,
@@ -11,6 +10,8 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         SignInSuccess: (state, action) => {
+            console.log("action.payload: ", action.payload);
+            
             state.currentUser = action.payload;
             state.error = null;
         },

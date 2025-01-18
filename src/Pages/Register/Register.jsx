@@ -10,6 +10,8 @@ import { HiOutlineMail } from "react-icons/hi";
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { SignInSuccess } from '../../redux/user/userSlice';
 
 
 
@@ -17,6 +19,7 @@ export default function Register() {
     const [formData, setFromData] = useState({}); //This state is for tracking what type in input field..!
     const [register, setRegister] = useState(false);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     //Handle Change is Input tracking function.......!
     const handleChange = (e) => {
@@ -29,6 +32,13 @@ export default function Register() {
 
       const handleSubmit = async (e)=>{
         e.preventDefault(); //This for prevent default submition..!
+
+        console.log(formData);
+
+        dispatch(SignInSuccess(formData));
+        navigate('/sign-in')
+
+        return
         try {
             const res = await axios.post('http://localhost:5000/api/user/register',formData);
             // const data = await res.data;
