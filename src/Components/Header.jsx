@@ -63,14 +63,14 @@ export default function Header() {
             // onSwiper={(swiper)=> console.log(swiper)}
             >
                 {
-                    product.map(({ id, title, desc, img}, index)=> {
+                    headerBooks.map(({ id, title, info, img}, index)=> {
                         return(
                         <SwiperSlide key={index}>
                             <div className="header-wrapper container flex flex-col-reverse md:flex-row mt-0 items-center gap-3 md:gap-[70px] xl:gap-[120px] mx-auto h-full w-full">
                             {/* .........Header left.......... */}
                               <div className="Header-left max-w-[1024px] w-full ">
                                 <h1 className=" text-xl md:text-2xl lg:text-3xl xl:text-6xl xl:leading-[100px] text-[#222222] font-[prata,serif]">{title}</h1>
-                                <p /*dangerouslySetInnerHTML={{__html:info}}*/ className="text-sm md:text-base lg:text-xl md:leading-[25px] lg:leading-[200%] tracking-[4%] font-['Plus Jakarta Sans', sans-serif] mt-2 md:mt-5 mb-7 lg:mb-16 ">{desc}</p>
+                                <p /*dangerouslySetInnerHTML={{__html:info}}*/ className="text-sm md:text-base lg:text-xl md:leading-[25px] lg:leading-[200%] tracking-[4%] font-['Plus Jakarta Sans', sans-serif] mt-2 md:mt-5 mb-7 lg:mb-16 ">{info}</p>
                                 <Link to={`book/${id}`} >
                                     <Button>Learn More</Button>
                                 </Link>
